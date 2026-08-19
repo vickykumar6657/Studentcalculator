@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudentCalc - Free Student Calculators</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 35px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: 17px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .tool {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .tool .icon {
+            font-size: 40px;
+        }
+
+        .tool h3 {
+            margin: 12px 0 8px;
+        }
+
+        .tool p {
+            color: #666;
+            font-size: 14px;
+            min-height: 40px;
+        }
+
+        .tool button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .tool button:hover {
+            background: #1d4ed8;
+        }
+
+        .calculator {
+            display: none;
+            max-width: 500px;
+            margin: 35px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.1);
+        }
+
+        .calculator h2 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin: 12px 0 18px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 13px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            margin-top: 15px;
+            width: 100%;
+            padding: 11px;
+            background: #ddd;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 15px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="creator-name">Created by - VICKY KUMAR (Vicky Singh Rajput) from SITAMARHI,Bihar</div>
+    <h1>StudentCalc</h1>
+    <p>Free Calculators for Students</p>
+</header>
+
+<div class="container">
+
+    <div class="welcome">
+        <h2>Student Tools</h2>
+        <p>Useful calculators for your study and college life</p>
+    </div>
+
+    <div class="tools">
+
+        <div class="tool">
+            <div class="icon">🎓</div>
+            <h3>CGPA to Percentage</h3>
+            <p>Convert your CGPA into percentage easily.</p>
+            <button onclick="showCGPA()">Open Calculator</button>
+        </div>
+
+        <div class="tool">
+            <div class="icon">📊</div>
+            <h3>SGPA Calculator</h3>
+            <p>Calculate your semester GPA easily.</p>
+            <button onclick="showSGPA()">Open Calculator</button>
+        </div>
+
+        <div class="tool">
+            <div class="icon">📝</div>
+            <h3>Percentage Calculator</h3>
+            <p>Calculate your marks percentage.</p>
+            <button onclick="showPercentage()">Open Calculator</button>
+        </div>
+
+        <div class="tool">
+            <div class="icon">📅</div>
+            <h3>Attendance Calculator</h3>
+            <p>Check your attendance percentage.</p>
+            <button onclick="document.getElementById('attendanceCalculator').style.display='block'; window.scrollTo(0, document.body.scrollHeight);">Open Calculator</button>
+        </div>
+
+    </div>
+
+    <div class="calculator" id="cgpaCalculator">
+
+        <h2>CGPA to Percentage</h2>
+
+        <label>Enter Your CGPA</label>
+
+        <input
+            type="number"
+            id="cgpa"
+            placeholder="Example: 8.2"
+            min="0"
+            max="10"
+            step="0.01"
+        >
+
+        <button class="calculate-btn" onclick="calculateCGPA()">
+            Calculate Percentage
+        </button>
+
+        <div id="result"></div>
+
+        <button class="back-btn" onclick="goBack()">
+            ← Back to Student Tools
+        </button>
+
+    </div>
+
+</div>
+<div class="calculator" id="sgpaCalculator">
+
+    <h2>SGPA Calculator</h2>
+
+    <p>Enter your subject credits and grade points</p>
+
+    <label>Subject 1 - Credit</label>
+    <input type="number" id="credit1" placeholder="Example: 4">
+
+    <label>Subject 1 - Grade Point</label>
+    <input type="number" id="grade1" placeholder="Example: 8">
+
+    <label>Subject 2 - Credit</label>
+    <input type="number" id="credit2" placeholder="Example: 3">
+
+    <label>Subject 2 - Grade Point</label>
+    <input type="number" id="grade2" placeholder="Example: 9">
+
+    <label>Subject 3 - Credit</label>
+    <input type="number" id="credit3" placeholder="Example: 4">
+
+    <label>Subject 3 - Grade Point</label>
+    <input type="number" id="grade3" placeholder="Example: 7">
+
+    <label>Subject 4 - Credit</label>
+    <input type="number" id="credit4" placeholder="Example: 3">
+
+    <label>Subject 4 - Grade Point</label>
+    <input type="number" id="grade4" placeholder="Example: 8">
+
+    <button class="calculate-btn" onclick="calculateSGPA()">
+        Calculate SGPA
+    </button>
+
+    <div id="sgpaResult"></div>
+
+    <button class="back-btn" onclick="goBackSGPA()">
+        ← Back to Student Tools
+    </button>
+
+</div>
+<foote
+    © 2026 StudentCalc | Free Student Tools
+    <div class="calculator" id="percentageCalculator">
+
+    <h2>Percentage Calculator</h2>
+
+    <label>Obtained Marks</label>
+    <input type="number" id="obtainedMarks" placeholder="450">
+
+    <label>Total Marks</label>
+    <input type="number" id="totalMarks" placeholder="500">
+
+    <button class="calculate-btn" onclick="calculatePercentage()">
+        Calculate Percentage
+    </button>
+
+    <div id="percentageResult"></div>
+
+    <button class="back-btn" onclick="goBackPercentage()">
+        ← Back
+    </button>
+
+</div>
+<div class="calculator" id="attendanceCalculator">
+
+    <h2>Attendance Calculator</h2>
+
+    <p>Check your attendance percentage</p>
+
+    <label>Total Classes</label>
+    <input type="number" id="totalClasses" placeholder="Example: 100">
+
+    <label>Classes Attended</label>
+    <input type="number" id="attendedClasses" placeholder="Example: 80">
+
+    <button class="calculate-btn" onclick="calculateAttendance()">
+        Calculate Attendance
+    </button>
+
+    <div id="attendanceResult"></div>
+
+    <button class="back-btn" onclick="goBackAttendance()">
+        ← Back to Student Tools
+    </button>
+
+</div>
+</footer>
+
+<script>
+
+function showCGPA() {
+    document.getElementById("cgpaCalculator").style.display = "block";
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+function calculateCGPA() {
+
+    let cgpa = parseFloat(
+        document.getElementById("cgpa").value
+    );
+
+    if (isNaN(cgpa) || cgpa < 0 || cgpa > 10) {
+
+        document.getElementById("result").innerHTML =
+            "Please enter CGPA between 0 and 10.";
+
+        return;
+    }
+
+    let percentage = cgpa * 9.5;
+
+    document.getElementById("result").innerHTML =
+        "Your Percentage: " + percentage.toFixed(2) + "%";
+}
+
+function goBack() {
+    document.getElementById("cgpaCalculator").style.display = "none";
+}
+
+function comingSoon() {
+    alert("This calculator will be available soon!");
+}
+
+function showSGPA() {
+    document.getElementById("sgpaCalculator").style.display = "block";
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+function calculateSGPA() {
+
+    let totalCredits = 0;
+    let totalPoints = 0;
+
+    for (let i = 1; i <= 4; i++) {
+
+        let credit = parseFloat(document.getElementById("credit" + i).value);
+        let grade = parseFloat(document.getElementById("grade" + i).value);
+
+        if (isNaN(credit) || isNaN(grade) || credit <= 0 || grade < 0) {
+            document.getElementById("sgpaResult").innerHTML =
+                "Please enter valid values.";
+            return;
+        }
+
+        totalCredits += credit;
+        totalPoints += credit * grade;
+    }
+
+    let sgpa = totalPoints / totalCredits;
+
+    document.getElementById("sgpaResult").innerHTML =
+        "Your SGPA: " + sgpa.toFixed(2);
+}
+
+function goBackSGPA() {
+    document.getElementById("sgpaCalculator").style.display = "none";
+}
+
+function showPercentage() {
+    document.getElementById("percentageCalculator").style.display = "block";
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+function calculatePercentage() {
+    let obtained = parseFloat(document.getElementById("obtainedMarks").value);
+    let total = parseFloat(document.getElementById("totalMarks").value);
+
+    if (isNaN(obtained) || isNaN(total) || total <= 0 || obtained < 0 || obtained > total) {
+        document.getElementById("percentageResult").innerHTML =
+            "Please enter valid marks.";
+        return;
+    }
+
+    let percentage = (obtained / total) * 100;
+
+    document.getElementById("percentageResult").innerHTML =
+        "Your Percentage: " + percentage.toFixed(2) + "%";
+}
+
+function goBackPercentage() {
+    document.getElementById("percentageCalculator").style.display = "none";
+}
+function showAttendance() {
+    document.getElementById("attendanceCalculator").style.display = "block";
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+function calculateAttendance() {
+
+    let total = parseFloat(
+        document.getElementById("totalClasses").value
+    );
+
+    let attended = parseFloat(
+        document.getElementById("attendedClasses").value
+    );
+
+    if (
+        isNaN(total) ||
+        isNaN(attended) ||
+        total <= 0 ||
+        attended < 0 ||
+        attended > total
+    ) {
+        document.getElementById("attendanceResult").innerHTML =
+            "Please enter valid class numbers.";
+        return;
+    }
+
+    let percentage = (attended / total) * 100;
+
+    let result =
+        "Your Attendance: " + percentage.toFixed(2) + "%<br>";
+
+    if (percentage >= 75) {
+
+        let canMiss = Math.floor(
+            (attended / 0.75) - total
+        );
+
+        result +=
+            "You can miss approximately " +
+            canMiss +
+            " more class(es) and stay at 75%.";
+
+    } else {
+
+        let required = Math.ceil(
+            (0.75 * total - attended) / 0.25
+        );
+
+        result +=
+            "You need to attend " +
+            required +
+            " consecutive class(es) to reach 75% attendance.";
+    }
+
+    document.getElementById("attendanceResult").innerHTML = result;
+}
+
+function goBackAttendance() {
+    document.getElementById("attendanceCalculator").style.display = "none";
+}
+</script>
+
+</body>
+</html>
