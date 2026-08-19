@@ -196,8 +196,14 @@
             <div class="icon">📅</div>
             <h3>Attendance Calculator</h3>
             <p>Check your attendance percentage.</p>
-            <button onclick="document.getElementById('attendanceCalculator').style.display='block'; window.scrollTo(0, document.body.scrollHeight);">Open Calculator</button>
-        </div>
+          <button onclick="
+    const attendance = document.getElementById('attendanceCalculator');
+    attendance.style.display = 'block';
+    attendance.scrollIntoView({ behavior: 'smooth', block: 'start' });
+">
+    Open Calculator
+</button>  
+        
 
     </div>
 
@@ -413,8 +419,14 @@ function goBackPercentage() {
     document.getElementById("percentageCalculator").style.display = "none";
 }
 function showAttendance() {
-    document.getElementById("attendanceCalculator").style.display = "block";
-    window.scrollTo(0, document.body.scrollHeight);
+    const attendance = document.getElementById("attendanceCalculator");
+
+    attendance.style.display = "block";
+
+    window.scrollTo({
+        top: attendance.offsetTop,
+        behavior: "smooth"
+    });
 }
 
 function calculateAttendance() {
@@ -473,6 +485,15 @@ function calculateAttendance() {
 function goBackAttendance() {
     document.getElementById("attendanceCalculator").style.display = "none";
 }
+function goBackAttendance() {
+    document.getElementById("attendanceCalculator").style.display = "none";
+}
+
+function showAttendance() {
+    document.getElementById("attendanceCalculator").style.display = "block";
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
 </script>
 
 </body>
